@@ -3747,6 +3747,24 @@ function submitFilterBrowse()
 	});
 }
 
+function showSupport()
+{
+	if (isLogin()){
+		menu.setMainPage('Support.html', {closeMenu: true});
+	} else {
+		menu.setMainPage('Support.html', {closeMenu: true})
+	}
+}
+
+function showEntertainment()
+{
+	if (isLogin()){
+		menu.setMainPage('Entertainment.html', {closeMenu: true});
+	} else {
+		menu.setMainPage('Entertainment.html', {closeMenu: true})
+	}
+}
+
 function showProfile()
 {
 	if (isLogin()){
@@ -6565,7 +6583,7 @@ function Localtion(){
 	var food = $.trim($('#men').val());
 
 	if( rn  && food ){
-		var address = "http://mealoop.com/mobileapp/api/search?address="+rn+"";
+		var address = "http://appy-tite.com/mobileapp/api/search?address="+rn+"";
 		h_23(food,address);
 	}
 	else if( !food ){
@@ -6587,7 +6605,7 @@ function kUz(){
 		  menu.setMainPage('home.html',{ closeMenu:true });
 	}else{
 		var rn =  $('#s').val();
-		var address = "http://mealoop.com/mobileapp/api/search?address="+rn+"";
+		var address = "http://appy-tite.com/mobileapp/api/search?address="+rn+"";
 		$.ajax({
 			url: address, 
 			type: 'post',                  
@@ -6657,7 +6675,7 @@ function h_23(food,address){
 function h_24(mrct_id){
 
 	var	ajax_request = $.ajax({
-		url: "http://mealoop.com/mobileapp/api/MenuCategory?merchant_id="+mrct_id+"", 
+		url: "http://appy-tite.com/mobileapp/api/MenuCategory?merchant_id="+mrct_id+"", 
 		type: 'post',                  
 		async: false,
 		dataType: 'jsonp',
@@ -6685,7 +6703,7 @@ function h_25(cat,_m_id){
 	console.log(_men)
 
 	var  ajax_request = $.ajax({
-		url: "http://mealoop.com/mobileapp/api/getItemByCategory?cat_id="+cat+"&merchant_id="+_m_id+"", 
+		url: "http://appy-tite.com/mobileapp/api/getItemByCategory?cat_id="+cat+"&merchant_id="+_m_id+"", 
 		data: "&lang_id=&api_key=fed7b441b349bae8f146711fbd215e90",
 		type: 'post',                  
 		async: false,

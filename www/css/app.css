@@ -1,3 +1,5 @@
+
+
 .wrapper{
 border:0px solid red;
 padding:8px;
@@ -14,6 +16,28 @@ text-align:center;
 .field-section{
 padding:8px;
 }
+#navlinks{
+	text-align:left;
+}
+#navlinks > ul{
+	list-style-type:none;
+	margin-top:0;
+}
+#navlinks > ul > li{
+	display:inline;
+	padding:5px;
+}
+#navlinks > ul > li > a{
+	display:inline-block;
+	text-align: left;
+	text-decoration:none;
+	color:inherit;
+}
+#navlinks > ul > li > a:hover{
+	font-weight:bold;
+	cursor:pointer;
+}
+
 .home-header,
 .orange-header
 {
@@ -39,6 +63,16 @@ max-width:70%;
 background:#D42525;
 color:#fff;
 border:none;
+}
+
+.bottombanner{
+	background-image: url(http://appy-tite.com/bottombanner.png);
+/*	background-image: url(images/bottombanner.png);*/
+	background-size: cover;
+	background-repeat:no-repeat;
+	background-position: center;
+	height: 33vh;
+	
 }
 
 .white,

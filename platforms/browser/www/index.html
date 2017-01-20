@@ -39,7 +39,7 @@
 <script src="lib/jquery.mask.min.js"></script>
 
 <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCnFhMGiD5K4TDUsBmz7ZVa5fOYQ-9XlP8&libraries=places"></script>
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.geocomplete.min.js"></script>
 
@@ -93,15 +93,16 @@
       <ons-icon icon="ion-ios-home-outline"></ons-icon> <span class="trn" data-trn-key="home">Home</span>
     </ons-list-item>
     
-    <ons-list-item onclick="menu.setMainPage('browseRestaurant.html', {closeMenu: true})" class="bottom-menu-item">
-      <ons-icon icon="ion-android-menu"></ons-icon> 
-      <span class="trn" data-trn-key="browse_resto">Browse Restaurant</span>
-    </ons-list-item>
-	
-	 <ons-list-item onclick="showEntertainment();" class="bottom-menu-item">
-      <ons-icon icon="ion-android-contact"></ons-icon> 
+	<ons-list-item onclick="showEntertainment();" class="bottom-menu-item">
+      <ons-icon icon="ion-android-restaurant"></ons-icon> 
       <span class="trn" data-trn-key="entertainment">Entertainment</span>
     </ons-list-item> 
+	
+	<ons-list-item onclick="kUz()" class="bottom-menu-item">
+      <ons-icon icon="ion-android-menu"></ons-icon> 
+      <span class="trn" data-trn-key="browse_resto">Nearby Restaurants</span>
+    </ons-list-item>
+	 
     
     <ons-list-item onclick="showProfile();" class="bottom-menu-item">
       <ons-icon icon="ion-android-contact"></ons-icon> 
@@ -110,7 +111,7 @@
     
     <ons-list-item onclick="showOrders();" class="bottom-menu-item">
       <ons-icon icon="ion-android-restaurant"></ons-icon> 
-      <span class="trn" data-trn-key="orders">Orders</span>
+      <span class="trn" data-trn-key="orders">My Orders</span>
     </ons-list-item>      
     
     <ons-list-item onclick="showAddressBook();" class="bottom-menu-item">
@@ -121,7 +122,7 @@
     <ons-list-item onclick="menu.setMainPage('pts.html', {closeMenu: true})" class="menu-pts bottom-menu-item">
       <ons-icon icon="ion-connection-bars"></ons-icon> 
       <span class="trn" data-trn-key="my_points">My Points</span>
-    </ons-list-item>    
+    </ons-list-item>   
     
     <ons-list-item onclick="menu.setMainPage('settings.html', {closeMenu: true})" class="bottom-menu-item">
       <ons-icon icon="ion-gear-a"></ons-icon> 
@@ -131,7 +132,12 @@
     <ons-list-item onclick="logout();" class="bottom-menu-item logout-menu">
       <ons-icon icon="ion-log-out"></ons-icon> 
       <span class="trn" data-trn-key="logout">Logout</span>
-    </ons-list-item>    
+    </ons-list-item>
+
+	<ons-list-item onclick="showSupport();" class="bottom-menu-item">
+      <ons-icon icon="ion-settings"></ons-icon> 
+      <span class="trn" data-trn-key="support">Support</span>
+    </ons-list-item>  
             
   </ons-list>
   </ons-page> 
@@ -140,24 +146,38 @@
 <script type="text/ons-template" id="home.html">
 <ons-navigator title="Navigator" var="kNavigator">
   <ons-page id="page-home" on-device-backbutton="exitKApp()" sliding-menu-ignore="true" >
+  
         
     <ons-toolbar>
       <div class="left">
-        <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>        
-      </div>    
-
+	  <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button> 
+		
+		<div id="navlinks" class="center white">
+		<ul>
+			<li><a onclick="kUz();">Nearby Restaurant</a></li>
+			<li><a>|</a></li>
+			<li><a onclick="showOrders();">My Orders</a></li>
+						
+		</ul>
+		</div>
+      </div>
+	  
+	  
     </ons-toolbar>
-
+	
     <div class="home-header">
          <img src="css/images/banner.png" alt="" title="">
     </div> 
        
     <div class="home-page wrapper center">       
-       <h4 class="trn" data-trn-key="enter_your_location">Enter your location</h4>
+       <h4 class="trn" data-trn-key="enter_your_location">What are you craving?</h4>
        
        <section class="field-section">
-         <input id="s" value="" type="text" class="text-input text-input--underbar trn" ng-model="text" placeholder="Area" data-trn-key="home_search_placeholder" 
+           <input id="men" value="" type="text" class="text-input text-input--underbar trn" placeholder="Enter Food Name"
          style="display: block; width: 100%">
+		 <input id="s" value="" type="text" class="text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City" data-trn-key="home_search_placeholder" 
+         style=" width: 100%">
+		 
        </section>
               
        <div class="padtop25">
@@ -167,13 +187,21 @@
        </button>       
        </div>
        
-        <button class="button green-btn button--large" onclick="searchMerchant();">
+    
+  <button class="button green-btn button--large" onclick="searchMerchant();" style="display:none">
 	      <span class="trn" data-trn-key="search_restaurant">Search Restaurant</span>    	      
 	      <div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
 	   </button>
-	   
+	   <button class="button green-btn button--large" onclick="Localtion();">
+	      <span class="trn" data-trn-key="search_restaurant">Search</span>    	      
+	      <div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
+	   </button>
+	  	   
 	   	  
-    </div>      
+    </div>  
+	<div class="bottombanner">
+	   	                
+       </div>
 
     <div class="wrapper no-connection">
       <ons-icon icon="ion-wifi" id="ion-wifi"></ons-icon>
@@ -597,8 +625,8 @@
    
    <input type="hidden" name="street" class="street">
    <input type="hidden" name="city" class="city">
-   <input type="hidden" name="state" class="state">   
-   <input type="hidden" name="zipcode" class="zipcode">  
+<!--   <input type="hidden" name="state" class="state">   
+   <input type="hidden" name="zipcode" class="zipcode"> --> 
    
    <input type="hidden" name="formatted_address" class="formatted_address">  
    <input type="hidden" name="google_lat" class="google_lat">  
@@ -1093,29 +1121,40 @@
 </ons-navigator> 
 </script>
 
+<script type="text/ons-template" id="Support.html">
+	<ons-navigator title="Navigator" var=sNavigator">
+		<ons-page id="page-support" on-device-backbutton="backToHome()">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="setHome();">
+						<ons-icon icon="fa-chevron-left"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+					
+				<div class="center white">
+					<span id="search-text" class="trn" data-trn-key="browse_resto">Support</span>
+				</div>
+			</ons-toolbar>
+			
+			<iframe src="http://smarturl.it/p2gd1d" width="100%" height="100%"></iframe>
+		</ons-page>
+	</ons-navigator>
+</script>
+
 <script type="text/ons-template" id="Entertainment.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 
-<ons-page id="page-entertainment" on-device-backbutton="backtoHome()" >
-   <ons-toolbar>     
-   
-    <div class="left">
-     <ons-toolbar-button onclick="setHome();">
-        <ons-icon icon="fa-chevron-left"></ons-icon>
-     </ons-toolbar-button>        
-    </div> 
-         
-    <div class="center white"><span id="search-text" class="trn" data-trn-key="browse_resto">Entertainment</span></div>           
-    
-
-      
-</ons-page>
-  <div style="left: 0px; border: 0px none; height: 370px; position: fixed; width: 270px; overflow: hidden; bottom: -67px;">
-    <div style="overflow: hidden;">
-    </div>
-    <iframe src="http://weather.gc.ca/wxlink/wxlink.html?cityCode=on-162&amp;lang=e" scrolling="no" style="height: 300px; border: 0px none; width: 165px; margin-bottom: 0px; margin-left: 24px;">
-    </iframe>
-    </div>
-    </div>  
+	<ons-page id="page-entertainment" on-device-backbutton="backtoHome()" >
+	   <ons-toolbar>     
+			<div class="left">
+				 <ons-toolbar-button onclick="setHome();">
+					<ons-icon icon="fa-chevron-left"></ons-icon>
+				 </ons-toolbar-button>        
+			</div> 
+			<div class="center white"><span id="search-text" class="trn" data-trn-key="browse_resto">Entertainment</span></div>
+		</ons-toolbar>
+		
+		<iframe src="http://smarturl.it/a0kr3s" width="100%" height="100%"></iframe>
+	</ons-page>
 </ons-navigator> 
 </script>
 
@@ -1535,15 +1574,15 @@
       placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
       </div>
       
-      <div class="field-wrapper">
+<!--      <div class="field-wrapper">
       <input type="text" name="state"  class="state text-input text-input--underbar has_validation" 
       placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>
+      </div>-->
       
-      <div class="field-wrapper">
+      <!--<div class="field-wrapper">
       <input type="text" name="zipcode"  class="zipcode text-input text-input--underbar has_validation" 
       placeholder="Zipcode" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
-      </div>
+      </div>-->
       
       <div class="field-wrapper">
       <input type="text" name="location_name"  class="location_name text-input text-input--underbar" 
@@ -2195,7 +2234,7 @@
 	      placeholder="City" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
 	      </div>      
 	   </div>
-	   <div class="wrapper">
+<!--	   <div class="wrapper">
 	      <div class="field-wrapper">
 	      <input type="text" name="state_1"  class="state_1 text-input text-input--underbar has_validation" 
 	      placeholder="State" value="" data-validation="required" data-validation-error-msg="this field is mandatory!" >
@@ -2206,7 +2245,7 @@
 	      <input type="text" name="zipcode_1"  class="zipcode_1 text-input text-input--underbar" 
 	      placeholder="Postal code/Zip Code" value=""  >
 	      </div>      
-	   </div>
+	   </div>-->
 	   
 	   <div class="wrapper">
 	   <button class="button green-btn button--large trn" onclick="setManualAddress();" data-trn-key="submit">
@@ -2238,7 +2277,7 @@
    
    <div class="map_search_field_wrap">      
       <ons-icon icon="ion-ios-search" modifier="iconsearch" ></ons-icon>
-      <input id="search_address_geo" value="" type="text" class="search_address_geo text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City,State" data-trn-key="home_search_placeholder" >
+      <input id="search_address_geo" value="" type="text" class="search_address_geo text-input text-input--underbar trn" ng-model="text" placeholder="Area" data-trn-key="home_search_placeholder" >
    </div>
    
    <div id="map_canvas_address">   
