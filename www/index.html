@@ -39,7 +39,7 @@
 <script src="lib/jquery.mask.min.js"></script>
 
 <!--<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCHBqHExBh8UgSaAnX1NgNZikZtH2aMk0o&libraries=places"></script>
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.geocomplete.min.js"></script>
 
@@ -93,15 +93,10 @@
       <ons-icon icon="ion-ios-home-outline"></ons-icon> <span class="trn" data-trn-key="home">Home</span>
     </ons-list-item>
     
-    <ons-list-item onclick="menu.setMainPage('browseRestaurant.html', {closeMenu: true})" class="bottom-menu-item">
+    <ons-list-item onclick="kUz()" class="bottom-menu-item">
       <ons-icon icon="ion-android-menu"></ons-icon> 
-      <span class="trn" data-trn-key="browse_resto">Browse Restaurant</span>
+      <span class="trn" data-trn-key="browse_resto">Nearby Restaurants</span>
     </ons-list-item>
-	
-	 <ons-list-item onclick="showEntertainment();" class="bottom-menu-item">
-      <ons-icon icon="ion-android-contact"></ons-icon> 
-      <span class="trn" data-trn-key="entertainment">Entertainment</span>
-    </ons-list-item> 
     
     <ons-list-item onclick="showProfile();" class="bottom-menu-item">
       <ons-icon icon="ion-android-contact"></ons-icon> 
@@ -145,6 +140,15 @@
       <div class="left">
         <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>        
       </div>    
+	  
+	   <div id="navlinks" class="center white">
+		<ul>
+			<a onclick="kUz();">Nearby Kitchen </a>
+			<a > | </a>
+			<a onclick="showOrders();">My Orders</a>
+		
+		</ul>
+	  </div>
 
     </ons-toolbar>
 
@@ -153,11 +157,14 @@
     </div> 
        
     <div class="home-page wrapper center">       
-       <h4 class="trn" data-trn-key="enter_your_location">Enter your location</h4>
+       <h4 class="trn" data-trn-key="enter_your_location">What are you craving?</h4>
        
        <section class="field-section">
-         <input id="s" value="" type="text" class="text-input text-input--underbar trn" ng-model="text" placeholder="Area" data-trn-key="home_search_placeholder" 
+           <input id="men" value="" type="text" class="text-input text-input--underbar trn" placeholder="Enter Food Name"
          style="display: block; width: 100%">
+		 <input id="s" value="" type="text" class="text-input text-input--underbar trn" ng-model="text" placeholder="Street Address,City" data-trn-key="home_search_placeholder" 
+         style=" width: 100%">
+		 
        </section>
               
        <div class="padtop25">
@@ -167,13 +174,21 @@
        </button>       
        </div>
        
-        <button class="button green-btn button--large" onclick="searchMerchant();">
+    
+  <button class="button green-btn button--large" onclick="searchMerchant();" style="display:none">
 	      <span class="trn" data-trn-key="search_restaurant">Search Restaurant</span>    	      
 	      <div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
 	   </button>
-	   
+	   <button class="button green-btn button--large" onclick="Localtion();">
+	      <span class="trn" data-trn-key="search_restaurant">Search</span>    	      
+	      <div class="search-btn"><ons-icon icon="fa-chevron-right"></ons-icon></div>
+	   </button>
+	  	   
 	   	  
-    </div>      
+    </div>  
+	<div class="bottombanner">
+	   	                
+       </div>
 
     <div class="wrapper no-connection">
       <ons-icon icon="ion-wifi" id="ion-wifi"></ons-icon>
@@ -1090,32 +1105,6 @@
    </ons-scroller>
       
 </ons-page>
-</ons-navigator> 
-</script>
-
-<script type="text/ons-template" id="Entertainment.html">   
-<ons-navigator title="Navigator" var="sNavigator"> 
-<ons-page id="page-entertainment" on-device-backbutton="backtoHome()" >
-   <ons-toolbar>     
-   
-    <div class="left">
-     <ons-toolbar-button onclick="setHome();">
-        <ons-icon icon="fa-chevron-left"></ons-icon>
-     </ons-toolbar-button>        
-    </div> 
-         
-    <div class="center white"><span id="search-text" class="trn" data-trn-key="browse_resto">Entertainment</span></div>           
-    
-
-      
-</ons-page>
-  <div style="left: 0px; border: 0px none; height: 370px; position: fixed; width: 270px; overflow: hidden; bottom: -67px;">
-    <div style="overflow: hidden;">
-    </div>
-    <iframe src="http://weather.gc.ca/wxlink/wxlink.html?cityCode=on-162&amp;lang=e" scrolling="no" style="height: 300px; border: 0px none; width: 165px; margin-bottom: 0px; margin-left: 24px;">
-    </iframe>
-    </div>
-    </div>  
 </ons-navigator> 
 </script>
 
