@@ -92,6 +92,11 @@
     <ons-list-item onclick="setHome();" class="bottom-menu-item" >
       <ons-icon icon="ion-ios-home-outline"></ons-icon> <span class="trn" data-trn-key="home">Home</span>
     </ons-list-item>
+	
+	<ons-list-item onclick="showEntertainment();" class="bottom-menu-item">
+      <ons-icon icon="ion-android-restaurant"></ons-icon> 
+      <span class="trn" data-trn-key="entertainment">Entertainment</span>
+    </ons-list-item> 
     
     <ons-list-item onclick="kUz()" class="bottom-menu-item">
       <ons-icon icon="ion-android-menu"></ons-icon> 
@@ -127,6 +132,11 @@
       <ons-icon icon="ion-log-out"></ons-icon> 
       <span class="trn" data-trn-key="logout">Logout</span>
     </ons-list-item>    
+	
+	<ons-list-item onclick="showSupport();" class="bottom-menu-item">
+      <ons-icon icon="ion-settings"></ons-icon> 
+      <span class="trn" data-trn-key="support">Support</span>
+    </ons-list-item>  
             
   </ons-list>
   </ons-page> 
@@ -232,6 +242,42 @@
 </ons-navigator> 
 </script>
 
+<script type="text/ons-template" id="Support.html">
+	<ons-navigator title="Navigator" var=sNavigator">
+		<ons-page id="page-support" on-device-backbutton="backToHome()">
+			<ons-toolbar>
+				<div class="left">
+					<ons-toolbar-button onclick="setHome();">
+						<ons-icon icon="fa-chevron-left"></ons-icon>
+					</ons-toolbar-button>
+				</div>
+					
+				<div class="center white">
+					<span id="search-text" class="trn" data-trn-key="browse_resto">Support</span>
+				</div>
+			</ons-toolbar>
+			
+			<iframe src="http://smarturl.it/p2gd1d" width="100%" height="100%"></iframe>
+		</ons-page>
+	</ons-navigator>
+</script>
+
+<script type="text/ons-template" id="Entertainment.html">   
+<ons-navigator title="Navigator" var="sNavigator"> 
+	<ons-page id="page-entertainment" on-device-backbutton="backtoHome()" >
+	   <ons-toolbar>     
+			<div class="left">
+				 <ons-toolbar-button onclick="setHome();">
+					<ons-icon icon="fa-chevron-left"></ons-icon>
+				 </ons-toolbar-button>        
+			</div> 
+			<div class="center white"><span id="search-text" class="trn" data-trn-key="browse_resto">Entertainment</span></div>
+		</ons-toolbar>
+		
+		<iframe src="http://smarturl.it/a0kr3s" width="100%" height="100%"></iframe>
+	</ons-page>
+</ons-navigator> 
+</script>
 
 <script type="text/ons-template" id="filterOptons.html">    
   <ons-dialog var="navDialog" style="width:90%;height:350px;" cancelable  >
