@@ -22,7 +22,6 @@
 <script src="lib/onsen/js/onsenui.js"></script>
 <script src="lib/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="http://mealoop.com/livechat/php/app.php?widget-init.js"></script>
 
 <script src="lib/raty/jquery.raty.js"></script>
 <script src="lib/jquery.form-validator.min.js"></script>
@@ -134,7 +133,7 @@
       <span class="trn" data-trn-key="logout">Logout</span>
     </ons-list-item>    
 	
-	<ons-list-item onclick="phpLiveChat.fullscreenOn();" class="bottom-menu-item">
+	<ons-list-item onclick="showSupport();" class="bottom-menu-item">
       <ons-icon icon="ion-settings"></ons-icon> 
       <span class="trn" data-trn-key="support">Support</span>
     </ons-list-item>  
@@ -257,17 +256,11 @@
 					<span id="search-text" class="trn" data-trn-key="browse_resto">Support</span>
 				</div>
 			</ons-toolbar>
-							// Show the widget
-				phpLiveChat.show();
-
-				// Turn on the full-screen mode
-				phpLiveChat.fullscreenOn();
-			//<iframe src="http://smarturl.it/p2gd1d" width="100%" height="100%"></iframe>
 			
+			<iframe src="http://smarturl.it/p2gd1d" width="100%" height="100%"></iframe>
 		</ons-page>
 	</ons-navigator>
 </script>
-
 
 <script type="text/ons-template" id="Entertainment.html">   
 <ons-navigator title="Navigator" var="sNavigator"> 

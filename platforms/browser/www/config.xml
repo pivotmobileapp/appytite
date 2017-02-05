@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pivotmobileapp.appytite" version="1.5.4" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.pivotmobileapp.appytite" version="2.5.0" versionCode="11" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Appy-tite</name>
     <description>
         Appy-tite
@@ -38,6 +38,12 @@
     <splash height="2208" platform="ios" src="Default-Portrait-736h@3x.png" width="1242" />
     <splash height="1024" platform="ios" src="Default-Portrait.png" width="768" />
     <splash height="2048" platform="ios" src="Default-Portrait@2x.png" width="1536" />
+    <splash platform="android" qualifier="ldpi" src="splash/ldpi.png" />
+    <splash platform="android" qualifier="mdpi" src="splash/mdpi.png" />
+    <splash platform="android" qualifier="hdpi" src="splash/hdpi.png" />
+    <splash platform="android" qualifier="xhdpi" src="splash/xhdpi.png" />
+    <splash platform="android" qualifier="fr-xhdpi" src="splash/xhdpi.png" />
+    <splash platform="android" qualifier="port-xxhdpi" src="splash/xxhdpi.png" />
     <content src="index.html" />
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <gap:plugin name="phonegap-plugin-push" source="npm" spec="1.5.3" />
@@ -54,7 +60,7 @@
     <gap:plugin source="git" spec="https://github.com/razorpay/razorpay-cordova.git" />
     <gap:plugin name="cordova-plugin-media" source="npm" />
     <gap:plugin name="cordova.plugins.diagnostic" source="npm" spec="3.3.1" />
-    <gap:plugin name="cordova-plugin-googlemaps" source="npm">
+    <gap:plugin name="cordova-plugin-googlemaps" source="npm" spec="1.3.9">
         <param name="API_KEY_FOR_ANDROID" value="AIzaSyCnFhMGiD5K4TDUsBmz7ZVa5fOYQ-9XlP8" />
         <param name="API_KEY_FOR_IOS" value="AIzaSyCnFhMGiD5K4TDUsBmz7ZVa5fOYQ-9XlP8" />
     </gap:plugin>
@@ -70,6 +76,7 @@
     <access origin="*" />
     <preference name="orientation" value="portrait" />
     <preference name="android-build-tool" value="gradle" />
+    <preference name="phonegap-version" value="cli-6.4.0" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="SplashScreenDelay" value="10000" />
     <preference name="fullscreen" value="false" />
